@@ -11,7 +11,8 @@ public class Menus {
 		System.out.println("Qual tarefa você deseja fazer?");
 		System.out.println("1 - Adicionar Livro");
 		System.out.println("2 - Listar Livros");
-		System.out.println("3 - Buscar Livro");
+		System.out.println("3 - Remover Livro");
+		System.out.println("4 - Buscar Livro");
 		System.out.println("0 - Sair");
 	}
 	
@@ -28,5 +29,5 @@ public class Menus {
 		System.out.println("2 - Registrar devolução");
 		System.out.println("3 - Mostrar livros emprestados e disponíveis");
 		System.out.println("0 - Sair");							
-	}				
+	}			
 }
