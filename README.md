@@ -1,22 +1,20 @@
-# Sistema-Bibliotecario (CLI)
-# Descrição 
-Um pequeno sistema bibliotecário em Java, ainda está em progresso. 
+## Sistema de Gerenciamento de Biblioteca
+Este é um simples projeto de sistema de gerenciamento de biblioteca desenvolvido em Java. O sistema opera via console e permite ao usuário realizar operações básicas de gerenciamento de livros. O projeto está estruturado de forma modular para facilitar a manutenção e futuras expansões.
 
 # Objetivos
 Estudo básico de Java, introdução à **POO** e trabalhos com **ArrayList**
 
-## Funcionalidades básicas (WIP)
+## Funcionalidades
+O sistema atualmente possui as seguintes funcionalidades implementadas e planejadas:
 
-1. **Gerenciar livros**
-   - Adicionar livro (título, autor, ISBN)
-   - Listar livros
-   - Buscar livro por título ou autor
+## Gerenciamento de Livros:
+Adicionar um novo livro (título, autor, ISBN).
+Listar todos os livros cadastrados.
+Remover um livro da lista pelo seu ID.
+Buscar por um livro.
 
-2. **Gerenciar usuários**
-   - Adicionar usuário (nome, ID)
-   - Listar usuários
+## Gerenciamento de Usuários (ainda não implementado):
+Menu para adicionar e listar usuários.
 
-3. **Empréstimo de livros**
-   - Registrar empréstimo de livro a um usuário
-   - Registrar devolução
-   - Mostrar livros emprestados e disponíveis
+## Sistema de Empréstimos (ainda não implementado):
+Menu para registrar empréstimos, devoluções e listar livros emprestados.
