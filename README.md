@@ -13,8 +13,8 @@ Listar todos os livros cadastrados.
 Remover um livro da lista pelo seu ID.
 Buscar por um livro.
 
-## Gerenciamento de Usuários (ainda não implementado):
-Menu para adicionar e listar usuários.
+## Gerenciamento de Usuários:
+Menu para adicionar listar e remover(W.I.P) usuários.
 
 ## Sistema de Empréstimos (ainda não implementado):
 Menu para registrar empréstimos, devoluções e listar livros emprestados.

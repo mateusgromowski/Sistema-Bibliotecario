@@ -5,6 +5,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		Menus menus = new Menus();
 		Books books = new Books();
+		Users users = new Users();
 		String choice;
 		String mainMenuChoice = ":P";
 		while (!mainMenuChoice.equals("0")) {
@@ -25,7 +26,8 @@ public class Main {
 					System.out.println("---------------MENU USUÁRIOS---------------");
 					menus.usersMenu();
 					System.out.print("Sua escolha: ");
-					sc.nextLine();	
+					choice = sc.nextLine();	
+					users.userChoices(choice);
 					break;
 				case "3":
 					System.out.println("-------------MENU EMPRÉSTIMOS-------------");

@@ -20,6 +20,7 @@ public class Menus {
 		System.out.println("Qual tarefa você deseja fazer?");
 		System.out.println("1 - Adicionar Usuário");
 		System.out.println("2 - Listar Usuários");
+		System.out.println("3 - Apagar Usuário");
 		System.out.println("0 - Sair");	 		
 	}
 	
