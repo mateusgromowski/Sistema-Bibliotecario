@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Users {
 	Scanner sc = new Scanner(System.in);
 	ArrayList<String> userList = new ArrayList<>();
-	String name;
+	String strInput;
+	int intInput;
 
 	void userChoices(String choice) {
 		switch(choice) {
@@ -15,7 +16,7 @@ public class Users {
 				listUsers();
 				break;
 			case "3":
-				//removeUser();
+				removeUser();
 				break;
 			case "0":
 				break;
@@ -25,18 +26,28 @@ public class Users {
 	}
 	
 	void addUser() {
-		System.out.print("Adicione o nome do usuário: ");
-		name = sc.nextLine();
-		userList.add(name);
+		System.out.print("\nAdicione o nome do usuário: ");
+		strInput = sc.nextLine();
+		userList.add(strInput);
 	}
 	
 	void listUsers() {
 		if (userList.size() == 0) {
-			System.out.println("Nenhum livro foi registrado, ainda.");	
+			System.out.println("Nenhum usuário foi registrado, ainda.");	
 		} else {
 			for (int iterator = 0; iterator < userList.size(); iterator++) {
-				System.out.printf("%d - %s\n", iterator + 1, userList.get(iterator));				
+				System.out.printf("\n%d - %s\n", iterator + 1, userList.get(iterator));				
 			}
+		}
+	}
+
+	void removeUser() {
+		if (userList.size() == 0) {
+			System.out.println("\nNenhum usuário foi registrado, ainda.");
+		} else {
+			System.out.print("\nInsira o ID do usuário que você deseja apagar: ");
+			intInput = sc.nextInt();
+			userList.remove(intInput - 1);
 		}
 	}
 }

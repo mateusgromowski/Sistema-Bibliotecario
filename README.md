@@ -14,7 +14,7 @@ Remover um livro da lista pelo seu ID.
 Buscar por um livro.
 
 ## Gerenciamento de Usuários:
-Menu para adicionar listar e remover(W.I.P) usuários.
+Menu para adicionar listar e remover usuários.
 
 ## Sistema de Empréstimos (ainda não implementado):
 Menu para registrar empréstimos, devoluções e listar livros emprestados.

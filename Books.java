@@ -23,11 +23,13 @@ public class Books {
 		 	case "4":
 		 		searchBook();
 		 		break;
+		 	default:
+		 		System.out.println("Entrada Inválida.");
 		}
 	}
 
 	void addBook() {
-		System.out.print("Qual livro você deseja adicionar?: ");
+		System.out.print("\nQual livro você deseja adicionar?: ");
 		strInput = sc.nextLine();
 		bookName.add(strInput);
 		System.out.print("Qual é o nome do autor?: ");
@@ -41,19 +43,19 @@ public class Books {
 
 	void listBooks() {
 		if (bookName.size() == 0) {
-			System.out.println("Nenhum livro foi registrado, ainda.");	
+			System.out.println("\nNenhum livro foi registrado, ainda.");	
 		} else {
 			for (int i = 0; i < bookName.size(); i++) {
-				System.out.printf("%d - %s - %s - %s\n",(i + 1), bookName.get(i), bookAuthor.get(i), bookISBN.get(i));	
+				System.out.printf("\n%d - %s - %s - %s\n",(i + 1), bookName.get(i), bookAuthor.get(i), bookISBN.get(i));	
 			}
 		}
 	}
 
 	void removeBook() {
 	if (bookName.size() == 0) {
-			System.out.println("Nenhum livro foi registrado, ainda.");
+			System.out.println("\nNenhum livro foi registrado, ainda.");
 		} else {
-			System.out.println("Insira o ID do livro que você deseja remover: ");
+			System.out.println("\nInsira o ID do livro que você deseja remover: ");
 			intInput = sc.nextInt();
 			bookName.remove(intInput - 1);
 			bookAuthor.remove(intInput - 1);
@@ -64,9 +66,9 @@ public class Books {
 
 	void searchBook() {
 		if (bookName.size() == 0) {
-			System.out.println("Nenhum livro foi registrado, ainda.");				
+			System.out.println("\nNenhum livro foi registrado, ainda.");				
 		} else {
-			System.out.print("Insira o nome do livro: ");
+			System.out.print("\nInsira o nome do livro: ");
 			strInput = sc.nextLine();
 			for (int iterator = 0; iterator < bookName.size(); iterator++) {
 				if (strInput.equals(bookName.get(iterator))) {

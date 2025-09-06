@@ -9,28 +9,28 @@ public class Main {
 		String choice;
 		String mainMenuChoice = ":P";
 		while (!mainMenuChoice.equals("0")) {
-			System.out.println("----------SISTEMA BIBLIOTECÁRIO----------");
+			System.out.println("\n----------SISTEMA BIBLIOTECÁRIO----------");
 			menus.showMenus();
 			System.out.printf("Sua escolha: ");
 			mainMenuChoice = sc.nextLine();
 
 			switch (mainMenuChoice) {
 				case "1":
-					System.out.println("---------------MENU LIVROS---------------");
+					System.out.println("\n---------------MENU LIVROS---------------");
 					menus.booksMenu();
 					System.out.print("Sua escolha: ");
 					choice = sc.nextLine();
 					books.booksChoices(choice);	
 					break;
 				case "2":
-					System.out.println("---------------MENU USUÁRIOS---------------");
+					System.out.println("\n---------------MENU USUÁRIOS---------------");
 					menus.usersMenu();
 					System.out.print("Sua escolha: ");
 					choice = sc.nextLine();	
 					users.userChoices(choice);
 					break;
 				case "3":
-					System.out.println("-------------MENU EMPRÉSTIMOS-------------");
+					System.out.println("\n-------------MENU EMPRÉSTIMOS-------------");
 					menus.borrowsMenu();
 					System.out.print("Sua escolha: ");
 					sc.nextLine();
