@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 	
 public class Books {
 	ArrayList<String> bookName = new ArrayList<>();
 	ArrayList<String> bookAuthor = new ArrayList<>();
 	ArrayList<String> bookISBN = new ArrayList<>();
+	ArrayList<Boolean> isBookBorrowed = new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 	String strInput;
 	int intInput;
@@ -38,6 +38,7 @@ public class Books {
 		System.out.print("Qual é o ISBN do livro?: ");
 		strInput = sc.nextLine();
 		bookISBN.add(strInput);
+		isBookBorrowed.add(false);
 		System.out.println("Livro adicionado com sucesso.");
 	}
 
@@ -45,8 +46,12 @@ public class Books {
 		if (bookName.size() == 0) {
 			System.out.println("\nNenhum livro foi registrado, ainda.");	
 		} else {
-			for (int i = 0; i < bookName.size(); i++) {
-				System.out.printf("\n%d - %s - %s - %s\n",(i + 1), bookName.get(i), bookAuthor.get(i), bookISBN.get(i));	
+			for (int iterator = 0; iterator < bookName.size(); iterator++) {
+				if (isBookBorrowed.get(iterator)) {
+					System.out.printf("\n%d - %s - %s - %s - Emprestado.\n",(iterator + 1), bookName.get(iterator), bookAuthor.get(iterator), bookISBN.get(iterator));
+				} else {
+					System.out.printf("\n%d - %s - %s - %s - Livre.\n",(iterator + 1), bookName.get(iterator), bookAuthor.get(iterator), bookISBN.get(iterator));
+				}				
 			}
 		}
 	}
@@ -60,6 +65,7 @@ public class Books {
 			bookName.remove(intInput - 1);
 			bookAuthor.remove(intInput - 1);
 			bookISBN.remove(intInput - 1);
+			isBookBorrowed.remove(intInput - 1);
 			System.out.println("Livro removido com sucesso.");
 		}
 	}

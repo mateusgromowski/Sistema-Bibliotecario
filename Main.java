@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -6,6 +6,7 @@ public class Main {
 		Menus menus = new Menus();
 		Books books = new Books();
 		Users users = new Users();
+		Borrows borrows = new Borrows();
 		String choice;
 		String mainMenuChoice = ":P";
 		while (!mainMenuChoice.equals("0")) {
@@ -33,7 +34,8 @@ public class Main {
 					System.out.println("\n-------------MENU EMPRÉSTIMOS-------------");
 					menus.borrowsMenu();
 					System.out.print("Sua escolha: ");
-					sc.nextLine();
+					choice = sc.nextLine();
+					borrows.borrowChoices(choice, books);
 					break;
 				case "0":
 					break;

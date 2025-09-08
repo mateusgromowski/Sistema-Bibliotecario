@@ -1,5 +1,4 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Users {
 	Scanner sc = new Scanner(System.in);
