@@ -17,4 +17,4 @@ Buscar por um livro.
 Menu para adicionar listar e remover usuários.
 
 ## Sistema de Empréstimos :
-Menu para registrar empréstimos(ainda não implementado), devoluções(ainda não implementado) e listar livros emprestados.
+Menu para registrar empréstimos, devoluções e listar livros emprestados.

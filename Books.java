@@ -60,7 +60,7 @@ public class Books {
 	if (bookName.size() == 0) {
 			System.out.println("\nNenhum livro foi registrado, ainda.");
 		} else {
-			System.out.println("\nInsira o ID do livro que você deseja remover: ");
+			System.out.print("\nInsira o ID do livro que você deseja remover: ");
 			intInput = sc.nextInt();
 			bookName.remove(intInput - 1);
 			bookAuthor.remove(intInput - 1);
