@@ -11,7 +11,5 @@ public class Main {
         BookRepository bookRepository = new BookRepository(factory);
         BookService bookService = new BookService(bookRepository);
         BookController bookController = new BookController(bookService);
-
-        bookController.addBook("Crime e Castigo", "Fiódor Dostoiévski", "1234567890123");
     }
 }

@@ -1,5 +1,7 @@
 package com.mateusgromowski.service;
 
+import java.sql.SQLException;
+
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.repository.BookRepository;
 
@@ -10,7 +12,7 @@ public class BookService {
         this.repository = repository;
     }
 
-    public void addBook(Book book) {
+    public void addBook(Book book) throws SQLException {
         if (book.getTitle().isBlank() || book.getAuthor().isBlank() || book.getIsbn().isBlank()) {
             throw new IllegalArgumentException("O livro não pode ter espaços em branco.");
         }
@@ -21,5 +23,9 @@ public class BookService {
 
         repository.addBook(book);
 
+    }
+
+    public Book getBookById(int id) throws SQLException {
+        return repository.getBookById(id);
     }
 }
