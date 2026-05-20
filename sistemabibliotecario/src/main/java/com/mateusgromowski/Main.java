@@ -11,6 +11,6 @@ public class Main {
         BookRepository bookRepository = new BookRepository(factory);
         BookService bookService = new BookService(bookRepository);
         BookController bookController = new BookController(bookService);
-        bookController.updateBook(1, "Noites Brancas", "Fiódor Dostoiévski", "1234567890123");
+        bookController.deleteBook(1);
     }
 }

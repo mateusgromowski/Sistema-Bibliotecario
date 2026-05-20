@@ -38,4 +38,12 @@ public class BookController {
             e.printStackTrace();
         }
     }
+
+    public void deleteBook(int id) {
+        try {
+            service.deleteBook(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

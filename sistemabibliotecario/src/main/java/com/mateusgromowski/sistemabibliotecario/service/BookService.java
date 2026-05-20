@@ -32,4 +32,8 @@ public class BookService {
     public void updateBook(int id, Book book) throws SQLException {
         repository.updateBook(id, book);
     }
+
+    public void deleteBook(int id) throws SQLException{
+        repository.deleteBook(id);
+    }
 }

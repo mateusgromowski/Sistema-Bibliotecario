@@ -60,4 +60,14 @@ public class BookRepository {
             throw new SQLException("Erro ao atualizar o livro: " + e.getMessage());
         }
     }
+
+    public void deleteBook(int id) throws SQLException {
+        String sql = "DELETE FROM book WHERE id = ?";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao deletar livro: " + e.getMessage());
+        }
+    }
 }
