@@ -1,4 +1,4 @@
-package com.mateusgromowski.service;
+package com.mateusgromowski.sistemabibliotecario.service;
 
 import java.sql.SQLException;
 
@@ -27,5 +27,9 @@ public class BookService {
 
     public Book getBookById(int id) throws SQLException {
         return repository.getBookById(id);
+    }
+
+    public void updateBook(int id, Book book) throws SQLException {
+        repository.updateBook(id, book);
     }
 }

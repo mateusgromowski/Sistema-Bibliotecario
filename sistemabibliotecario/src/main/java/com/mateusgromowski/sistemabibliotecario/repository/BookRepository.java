@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mateusgromowski.conn.ConnectionFactory;
+import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 
 public class BookRepository {
@@ -42,6 +42,22 @@ public class BookRepository {
             return book;
         } catch (SQLException e) {
             throw new SQLException("Erro ao buscar o livro no banco de dados. " + e.getMessage());
+        }
+    }
+
+    public void updateBook(int id, Book book) throws SQLException {
+        String sql = "UPDATE book SET title = ?, author = ?, isbn = ? WHERE id = ?";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
+            ps.setString(3, book.getIsbn());
+            ps.setInt(4, id);
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new SQLException("Livro não encontrado.");
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao atualizar o livro: " + e.getMessage());
         }
     }
 }

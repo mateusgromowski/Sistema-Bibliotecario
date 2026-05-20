@@ -1,9 +1,9 @@
-package com.mateusgromowski.controller;
+package com.mateusgromowski.sistemabibliotecario.controller;
 
 import java.sql.SQLException;
 
-import com.mateusgromowski.service.BookService;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
+import com.mateusgromowski.sistemabibliotecario.service.BookService;
 
 public class BookController {
     private BookService service;
@@ -28,5 +28,14 @@ public class BookController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void updateBook(int id, String title, String author, String isbn) {
+        Book book = Book.builder().id(id).title(title).author(author).isbn(isbn).build();
+        try {
+            service.updateBook(id, book);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

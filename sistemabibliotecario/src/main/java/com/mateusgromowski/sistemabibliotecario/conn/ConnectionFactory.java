@@ -1,4 +1,4 @@
-package com.mateusgromowski.conn;
+package com.mateusgromowski.sistemabibliotecario.conn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
