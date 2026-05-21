@@ -20,4 +20,15 @@ public class UserController {
             e.printStackTrace();
         }
     }
+
+    public User getUserById(int id) {
+        User user = null;
+        try {
+            user = service.getUserById(id);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

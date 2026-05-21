@@ -2,6 +2,7 @@ package com.mateusgromowski.sistemabibliotecario.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
@@ -23,6 +24,22 @@ public class UserRepository {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new SQLException("Usuário não pôde ser adicionado. " + e.getMessage());
+        }
+    }
+
+    public User getUserById(int id) throws SQLException {
+        String sql = "SELECT * FROM user_table WHERE id = ?";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                User user = User.builder().id(rs.getInt("id")).name(rs.getString("name")).email(rs.getString("email"))
+                        .build();
+                return user;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new SQLException("Usuário inacessível. " + e.getMessage());
         }
     }
 

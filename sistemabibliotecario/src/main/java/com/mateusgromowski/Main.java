@@ -3,6 +3,7 @@ package com.mateusgromowski;
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.controller.BookController;
 import com.mateusgromowski.sistemabibliotecario.controller.UserController;
+import com.mateusgromowski.sistemabibliotecario.model.User;
 import com.mateusgromowski.sistemabibliotecario.repository.BookRepository;
 import com.mateusgromowski.sistemabibliotecario.repository.UserRepository;
 import com.mateusgromowski.sistemabibliotecario.service.BookService;
@@ -14,6 +15,7 @@ public class Main {
         UserRepository ur = new UserRepository(factory);
         UserService us = new UserService(ur);
         UserController uc = new UserController(us);
-        uc.addUser("Mateus", "mateusbarbosagromowski@gmail.com");
+        User user = uc.getUserById(1);
+        System.out.println(user);
     }
 }

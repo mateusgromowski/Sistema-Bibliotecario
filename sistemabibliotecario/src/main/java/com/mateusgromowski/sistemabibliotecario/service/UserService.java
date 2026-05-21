@@ -15,4 +15,8 @@ public class UserService {
     public void addUser(User user) throws SQLException {
         repository.addUser(user);
     }
+
+    public User getUserById(int id) throws SQLException {
+        return repository.getUserById(id);
+    }
 }
