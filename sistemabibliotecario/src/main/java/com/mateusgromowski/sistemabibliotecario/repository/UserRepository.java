@@ -1,0 +1,29 @@
+package com.mateusgromowski.sistemabibliotecario.repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
+import com.mateusgromowski.sistemabibliotecario.model.User;
+
+public class UserRepository {
+    private ConnectionFactory connectionFactory;
+
+    public UserRepository(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
+
+    public void addUser(User user) throws SQLException {
+        String sql = "INSERT INTO user_table (name, email) VALUES (?, ?)";
+        try (Connection conn = connectionFactory.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Usuário não pôde ser adicionado. " + e.getMessage());
+        }
+    }
+
+}
