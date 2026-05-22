@@ -23,4 +23,8 @@ public class UserService {
     public void updateUser(User user, int id) throws SQLException {
         repository.updateUser(user, id);
     }
+
+    public void deleteUser(int id) throws SQLException {
+        repository.deleteUser(id);
+    }
 }
