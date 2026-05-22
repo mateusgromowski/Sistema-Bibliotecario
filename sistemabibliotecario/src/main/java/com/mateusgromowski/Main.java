@@ -17,5 +17,8 @@ public class Main {
         UserController uc = new UserController(us);
         User user = uc.getUserById(1);
         System.out.println(user);
+        uc.updateUser(1, "Linus Torvalds", "linus@linux.com");
+        user = uc.getUserById(1);
+        System.out.println(user);
     }
 }

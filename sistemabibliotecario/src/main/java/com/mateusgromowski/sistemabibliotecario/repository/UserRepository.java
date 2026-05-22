@@ -43,4 +43,16 @@ public class UserRepository {
         }
     }
 
+    public void updateUser(User user, int id) throws SQLException {
+        String sql = "UPDATE user_table SET name = ?, email = ? WHERE id = ?";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Impossível atualizar usuário. " + e.getMessage());
+        }
+    }
+
 }

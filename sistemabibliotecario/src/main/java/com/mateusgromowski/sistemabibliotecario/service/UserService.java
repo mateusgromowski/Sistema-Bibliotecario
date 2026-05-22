@@ -19,4 +19,8 @@ public class UserService {
     public User getUserById(int id) throws SQLException {
         return repository.getUserById(id);
     }
+
+    public void updateUser(User user, int id) throws SQLException {
+        repository.updateUser(user, id);
+    }
 }

@@ -31,4 +31,13 @@ public class UserController {
         }
         return user;
     }
+
+    public void updateUser(int id, String name, String email) {
+        User user = User.builder().name(name).email(email).build();
+        try {
+            service.updateUser(user, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
