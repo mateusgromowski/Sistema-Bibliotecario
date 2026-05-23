@@ -37,8 +37,9 @@ public class Main {
         String mockBookAuthor = "Mock Author";
         String mockUserName = "Mock User";
         String mockUserEmail = "mock.user@example.com";
-        bookController.addBook(mockBookTitle, mockBookAuthor, "1234567890");
-        userController.addUser(mockUserName, mockUserEmail);
-        loanController.addLoan(2, 2);
+        // bookController.addBook(mockBookTitle, mockBookAuthor, "1234567890");
+        // userController.addUser(mockUserName, mockUserEmail);
+        // loanController.addLoan(2, 2);
+        loanController.devolute(1);
     }
 }

@@ -19,4 +19,12 @@ public class LoanController {
             e.printStackTrace();
         }
     }
+
+    public void devolute(int id) {
+        try {
+            service.devolute(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
