@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
+import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 
 public class LoanRepository {
@@ -67,6 +68,24 @@ public class LoanRepository {
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar empréstimo. " + e.getMessage());
         }
+    }
+
+    public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
+        String sql = "select loan.id, title, name, borrow_date, devolution_date from loan join book on loan.book_id = book.id join user_table on loan.user_id = user_table.id where loan.id = ?";
+        LoanDetailedDTO loanDto = null;
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                loanDto = LoanDetailedDTO.builder().id(id).title(rs.getString("title"))
+                        .name(rs.getString("name"))
+                        .borrowDate(rs.getDate("borrow_date").toLocalDate())
+                        .devolutionDate(rs.getDate("devolution_date").toLocalDate()).build();
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
+        }
+        return loanDto;
     }
 
 }

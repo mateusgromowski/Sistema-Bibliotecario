@@ -3,6 +3,7 @@ package com.mateusgromowski.sistemabibliotecario.controller;
 import java.sql.SQLException;
 
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
+import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 import com.mateusgromowski.sistemabibliotecario.service.LoanService;
 
@@ -45,6 +46,15 @@ public class LoanController {
             service.updateLoan(userId, dto);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public LoanDetailedDTO getFormattedLoan(int id) {
+        try {
+            return service.getFormattedLoan(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

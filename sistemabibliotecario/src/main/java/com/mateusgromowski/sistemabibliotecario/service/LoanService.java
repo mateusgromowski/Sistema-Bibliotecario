@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
+import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 import com.mateusgromowski.sistemabibliotecario.repository.LoanRepository;
 
@@ -28,5 +29,9 @@ public class LoanService {
 
     public void updateLoan(int id, LoanDTO dto) throws SQLException {
         repository.updateLoan(id, dto);
+    }
+
+    public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
+        return repository.getFormattedLoan(id);
     }
 }
