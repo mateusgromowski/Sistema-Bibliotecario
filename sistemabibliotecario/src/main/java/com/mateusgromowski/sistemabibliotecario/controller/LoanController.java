@@ -57,4 +57,12 @@ public class LoanController {
             return null;
         }
     }
+
+    public void deleteLoan(int id) {
+        try {
+            service.deleteLoan(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -88,4 +88,15 @@ public class LoanRepository {
         return loanDto;
     }
 
+    public void deleteLoan(int id) throws SQLException {
+        String sql = "DELETE FROM loan WHERE id = ?";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new SQLException("Impossível deletar empréstimo. " + e.getMessage());
+        }
+    }
+
 }

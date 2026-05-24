@@ -34,4 +34,8 @@ public class LoanService {
     public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
         return repository.getFormattedLoan(id);
     }
+
+    public void deleteLoan(int id) throws SQLException {
+        repository.deleteLoan(id);
+    }
 }
