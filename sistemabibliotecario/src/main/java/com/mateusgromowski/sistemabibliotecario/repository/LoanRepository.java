@@ -72,6 +72,8 @@ public class LoanRepository {
             ps.setInt(1, dto.bookId());
             ps.setInt(2, dto.userId());
             ps.setInt(3, id);
+
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar empréstimo. " + e.getMessage());
         }
