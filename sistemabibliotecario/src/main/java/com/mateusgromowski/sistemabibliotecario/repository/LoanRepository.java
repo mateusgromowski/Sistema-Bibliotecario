@@ -45,13 +45,20 @@ public class LoanRepository {
     public Optional<Loan> getLoanById(int id) throws SQLException {
         String sql = "SELECT * FROM loan WHERE id = ?";
         Loan loan = null;
-        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionFactory.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();) {
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                loan = Loan.builder().id(id).bookId(rs.getInt("book_id")).userId(rs.getInt("user_id"))
-                        .borrowDate(rs.getDate("borrow_date").toLocalDate())
-                        .devolutionDate(rs.getDate("devolution_date").toLocalDate()).build();
+                int bookId = rs.getInt("book_id");
+                int userId = rs.getInt("user_id");
+                LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
+                Date devolutionDate = rs.getDate("devolution_date");
+                LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
+                loan = Loan.builder().id(id).bookId(bookId).userId(userId)
+                        .borrowDate(borrowDate)
+                        .devolutionDate(devolutionLocalDate)
+                        .build();
             }
         } catch (SQLException e) {
             throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
@@ -73,14 +80,24 @@ public class LoanRepository {
     public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
         String sql = "select loan.id, title, name, borrow_date, devolution_date from loan join book on loan.book_id = book.id join user_table on loan.user_id = user_table.id where loan.id = ?";
         LoanDetailedDTO loanDto = null;
-        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionFactory.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();) {
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                loanDto = LoanDetailedDTO.builder().id(id).title(rs.getString("title"))
-                        .name(rs.getString("name"))
-                        .borrowDate(rs.getDate("borrow_date").toLocalDate())
-                        .devolutionDate(rs.getDate("devolution_date").toLocalDate()).build();
+                Date devolutionDate = rs.getDate("devolution_date");
+                LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
+                String title = rs.getString("title");
+                String userName = rs.getString("name");
+                LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
+                loanDto = LoanDetailedDTO
+                        .builder()
+                        .id(id)
+                        .title(title)
+                        .name(userName)
+                        .borrowDate(borrowDate)
+                        .devolutionDate(devolutionLocalDate)
+                        .build();
             }
         } catch (SQLException e) {
             throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
