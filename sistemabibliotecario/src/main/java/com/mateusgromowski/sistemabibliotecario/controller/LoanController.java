@@ -38,4 +38,13 @@ public class LoanController {
         }
         return loan;
     }
+
+    public void updateLoan(int id, int bookId, int userId) {
+        LoanDTO dto = new LoanDTO(bookId, userId);
+        try {
+            service.updateLoan(userId, dto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

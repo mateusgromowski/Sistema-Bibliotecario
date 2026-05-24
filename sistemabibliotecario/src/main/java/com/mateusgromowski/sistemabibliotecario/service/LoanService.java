@@ -26,7 +26,7 @@ public class LoanService {
         return repository.getLoanById(id);
     }
 
-    public void updateLoan(int id, int book_id, int user_id) throws SQLException {
-        repository.updateLoan(id, book_id, user_id);
+    public void updateLoan(int id, LoanDTO dto) throws SQLException {
+        repository.updateLoan(id, dto);
     }
 }

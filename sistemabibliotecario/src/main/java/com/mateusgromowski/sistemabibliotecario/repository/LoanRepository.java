@@ -58,11 +58,11 @@ public class LoanRepository {
         return Optional.ofNullable(loan);
     }
 
-    public void updateLoan(int id, int book_id, int user_id) throws SQLException {
+    public void updateLoan(int id, LoanDTO dto) throws SQLException {
         String sql = "UPDATE loan SET book_id = ?, user_id = ? WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, book_id);
-            ps.setInt(2, user_id);
+            ps.setInt(1, dto.bookId());
+            ps.setInt(2, dto.userId());
             ps.setInt(3, id);
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar empréstimo. " + e.getMessage());
