@@ -43,7 +43,7 @@ public class LoanController {
     public void updateLoan(int id, int bookId, int userId) {
         LoanDTO dto = new LoanDTO(bookId, userId);
         try {
-            service.updateLoan(userId, dto);
+            service.updateLoan(id, dto);
         } catch (SQLException e) {
             e.printStackTrace();
         }

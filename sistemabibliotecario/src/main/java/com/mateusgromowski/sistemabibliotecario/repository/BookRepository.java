@@ -30,9 +30,10 @@ public class BookRepository {
     public Book getBookById(int id) throws SQLException {
         Book book = null;
         String sql = "SELECT id, title, author, isbn FROM book WHERE id = ?";
-        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = connectionFactory.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 book = Book.builder().id(Integer.parseInt(rs.getString("id"))).title(rs.getString("title"))
                         .author(rs.getString("author"))
