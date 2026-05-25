@@ -13,12 +13,24 @@ public class BookService {
     }
 
     public void addBook(Book book) throws SQLException {
-        if (book.getTitle().isBlank() || book.getAuthor().isBlank() || book.getIsbn().isBlank()) {
-            throw new IllegalArgumentException("O livro não pode ter espaços em branco.");
+        String title = book.getTitle();
+        String author = book.getAuthor();
+        String isbn = book.getIsbn();
+        if (title == null || author == null || isbn == null) {
+            throw new NullPointerException("Os dados do livro não podem ser nulos.");
         }
 
-        if (book.getIsbn().length() > 13) {
-            throw new IllegalArgumentException("O ISBN não pode ser maior que 13 caracteres.");
+        if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
+            throw new IllegalArgumentException("O livro não pode ter nome, autor ou ISBN em branco.");
+        }
+
+        if (!isbn.matches("\\d+")) {
+            throw new IllegalArgumentException("O ISBN deve conter apenas dígitos, sem hífens.");
+        }
+
+        int isbnLength = isbn.length();
+        if (!(isbnLength == 10 || isbnLength == 13)) {
+            throw new IllegalArgumentException("O ISBN deve ter 13 ou 10 dígitos.");
         }
 
         repository.addBook(book);
@@ -33,7 +45,7 @@ public class BookService {
         repository.updateBook(id, book);
     }
 
-    public void deleteBook(int id) throws SQLException{
+    public void deleteBook(int id) throws SQLException {
         repository.deleteBook(id);
     }
 }

@@ -27,11 +27,11 @@ public class LoanRepository {
             ps.setInt(2, dto.userId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Impossível criar empréstimo.");
+            throw new SQLException("Impossível criar empréstimo. " + e.getMessage());
         }
     }
 
-    public void devolute(int id) throws SQLException {
+    public void returnLoan(int id) throws SQLException {
         String sql = "UPDATE loan SET devolution_date = ? WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setDate(1, Date.valueOf(LocalDate.now()));

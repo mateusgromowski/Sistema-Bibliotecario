@@ -35,7 +35,7 @@ public class BookRepository {
                 ResultSet rs = ps.executeQuery()) {
             ps.setInt(1, id);
             while (rs.next()) {
-                book = Book.builder().id(Integer.parseInt(rs.getString("id"))).title(rs.getString("title"))
+                book = Book.builder().id(rs.getInt("id")).title(rs.getString("title"))
                         .author(rs.getString("author"))
                         .isbn(rs.getString("isbn"))
                         .build();

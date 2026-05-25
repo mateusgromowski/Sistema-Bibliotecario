@@ -19,8 +19,8 @@ public class LoanService {
         repository.addLoan(dto);
     }
 
-    public void devolute(int id) throws SQLException {
-        repository.devolute(id);
+    public void returnLoan(int id) throws SQLException {
+        repository.returnLoan(id);
     }
 
     public Optional<Loan> getLoanById(int id) throws SQLException {

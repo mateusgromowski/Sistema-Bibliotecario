@@ -24,7 +24,7 @@ public class LoanController {
 
     public void devolute(int id) {
         try {
-            service.devolute(id);
+            service.returnLoan(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
