@@ -1,6 +1,7 @@
 package com.mateusgromowski.sistemabibliotecario.controller;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.service.BookService;
@@ -21,13 +22,13 @@ public class BookController {
         }
     }
 
-    public Book getBookById(int id) {
+    public Optional<Book> getBookById(int id) {
         try {
             return service.getBookById(id);
         } catch (SQLException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
-        return null;
     }
 
     public void updateBook(int id, String title, String author, String isbn) {

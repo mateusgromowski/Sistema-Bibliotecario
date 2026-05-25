@@ -25,13 +25,12 @@ public class UserController {
     }
 
     public Optional<User> getUserById(int id) {
-        Optional<User> user = Optional.empty();
         try {
-            user = Optional.ofNullable(service.getUserById(id));
+            return service.getUserById(id);
         } catch (SQLException e) {
             e.printStackTrace();
+            return Optional.empty();
         }
-        return user;
     }
 
     public boolean updateUser(int id, String name, String email) {

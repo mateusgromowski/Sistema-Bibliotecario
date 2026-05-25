@@ -1,6 +1,7 @@
 package com.mateusgromowski.sistemabibliotecario.service;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.repository.BookRepository;
@@ -37,8 +38,8 @@ public class BookService {
 
     }
 
-    public Book getBookById(int id) throws SQLException {
-        return repository.getBookById(id);
+    public Optional<Book> getBookById(int id) throws SQLException {
+        return Optional.ofNullable(repository.getBookById(id));
     }
 
     public void updateBook(int id, Book book) throws SQLException {

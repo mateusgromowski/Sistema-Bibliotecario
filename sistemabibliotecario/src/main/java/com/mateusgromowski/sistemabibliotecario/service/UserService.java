@@ -1,6 +1,7 @@
 package com.mateusgromowski.sistemabibliotecario.service;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.model.User;
 import com.mateusgromowski.sistemabibliotecario.repository.UserRepository;
@@ -16,8 +17,8 @@ public class UserService {
         repository.addUser(user);
     }
 
-    public User getUserById(int id) throws SQLException {
-        return repository.getUserById(id);
+    public Optional<User> getUserById(int id) throws SQLException {
+        return Optional.ofNullable(repository.getUserById(id));
     }
 
     public void updateUser(User user, int id) throws SQLException {
