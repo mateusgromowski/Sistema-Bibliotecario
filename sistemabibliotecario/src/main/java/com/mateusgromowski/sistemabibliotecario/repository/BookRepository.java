@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
@@ -27,20 +28,21 @@ public class BookRepository {
         }
     }
 
-    public Book getBookById(int id) throws SQLException {
+    public Optional<Book> getBookById(int id) throws SQLException {
         Book book = null;
         String sql = "SELECT id, title, author, isbn FROM book WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
-            while (rs.next()) {
-                book = Book.builder().id(rs.getInt("id")).title(rs.getString("title"))
-                        .author(rs.getString("author"))
-                        .isbn(rs.getString("isbn"))
-                        .build();
+            try (ResultSet rs = ps.executeQuery();) {
+                while (rs.next()) {
+                    book = Book.builder().id(rs.getInt("id")).title(rs.getString("title"))
+                            .author(rs.getString("author"))
+                            .isbn(rs.getString("isbn"))
+                            .build();
+                }
             }
-            return book;
+            return Optional.ofNullable(book);
         } catch (SQLException e) {
             throw new SQLException("Erro ao buscar o livro no banco de dados. " + e.getMessage());
         }

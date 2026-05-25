@@ -1,6 +1,7 @@
 package com.mateusgromowski.sistemabibliotecario.controller;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
@@ -30,10 +31,10 @@ public class LoanController {
         }
     }
 
-    public Loan getLoanById(int id) {
-        Loan loan = null;
+    public Optional<Loan> getLoanById(int id) {
+        Optional<Loan> loan = Optional.empty();
         try {
-            loan = service.getLoanById(id).get();
+            loan = service.getLoanById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,12 +50,12 @@ public class LoanController {
         }
     }
 
-    public LoanDetailedDTO getFormattedLoan(int id) {
+    public Optional<LoanDetailedDTO> getFormattedLoan(int id) {
         try {
             return service.getFormattedLoan(id);
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return Optional.empty();
         }
     }
 

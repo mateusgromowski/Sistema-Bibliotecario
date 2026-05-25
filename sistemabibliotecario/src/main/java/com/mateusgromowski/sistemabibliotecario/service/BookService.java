@@ -39,7 +39,7 @@ public class BookService {
     }
 
     public Optional<Book> getBookById(int id) throws SQLException {
-        return Optional.ofNullable(repository.getBookById(id));
+        return repository.getBookById(id);
     }
 
     public void updateBook(int id, Book book) throws SQLException {

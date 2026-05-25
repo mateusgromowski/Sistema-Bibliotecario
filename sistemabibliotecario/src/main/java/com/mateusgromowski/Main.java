@@ -13,7 +13,7 @@ public class Main {
         LoanRepository repository = new LoanRepository(connectionFactory);
         LoanService service = new LoanService(repository);
         LoanController controller = new LoanController(service);
-        LoanDetailedDTO dto = controller.getFormattedLoan(1);
+        LoanDetailedDTO dto = controller.getFormattedLoan(1).get();
         System.out.println(dto);
     }
 }

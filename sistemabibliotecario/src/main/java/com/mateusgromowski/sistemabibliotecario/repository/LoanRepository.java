@@ -46,24 +46,26 @@ public class LoanRepository {
         String sql = "SELECT * FROM loan WHERE id = ?";
         Loan loan = null;
         try (Connection conn = connectionFactory.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();) {
+                PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
-            if (rs.next()) {
-                int bookId = rs.getInt("book_id");
-                int userId = rs.getInt("user_id");
-                LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
-                Date devolutionDate = rs.getDate("devolution_date");
-                LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
-                loan = Loan.builder().id(id).bookId(bookId).userId(userId)
-                        .borrowDate(borrowDate)
-                        .devolutionDate(devolutionLocalDate)
-                        .build();
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int bookId = rs.getInt("book_id");
+                    int userId = rs.getInt("user_id");
+                    LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
+                    Date devolutionDate = rs.getDate("devolution_date");
+                    LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
+                    loan = Loan.builder().id(id).bookId(bookId).userId(userId)
+                            .borrowDate(borrowDate)
+                            .devolutionDate(devolutionLocalDate)
+                            .build();
+                }
             }
+            return Optional.ofNullable(loan);
         } catch (SQLException e) {
             throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
         }
-        return Optional.ofNullable(loan);
+
     }
 
     public void updateLoan(int id, LoanDTO dto) throws SQLException {
@@ -72,39 +74,41 @@ public class LoanRepository {
             ps.setInt(1, dto.bookId());
             ps.setInt(2, dto.userId());
             ps.setInt(3, id);
-
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar empréstimo. " + e.getMessage());
         }
     }
 
-    public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
+    public Optional<LoanDetailedDTO> getFormattedLoan(int id) throws SQLException {
         String sql = "select loan.id, title, name, borrow_date, devolution_date from loan join book on loan.book_id = book.id join user_table on loan.user_id = user_table.id where loan.id = ?";
         LoanDetailedDTO loanDto = null;
         try (Connection conn = connectionFactory.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();) {
+                PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
-            if (rs.next()) {
-                Date devolutionDate = rs.getDate("devolution_date");
-                LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
-                String title = rs.getString("title");
-                String userName = rs.getString("name");
-                LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
-                loanDto = LoanDetailedDTO
-                        .builder()
-                        .id(id)
-                        .title(title)
-                        .name(userName)
-                        .borrowDate(borrowDate)
-                        .devolutionDate(devolutionLocalDate)
-                        .build();
+            try (ResultSet rs = ps.executeQuery();) {
+                if (rs.next()) {
+                    Date devolutionDate = rs.getDate("devolution_date");
+                    LocalDate devolutionLocalDate = devolutionDate != null ? devolutionDate.toLocalDate() : null;
+                    String title = rs.getString("title");
+                    String userName = rs.getString("name");
+                    LocalDate borrowDate = rs.getDate("borrow_date").toLocalDate();
+                    loanDto = LoanDetailedDTO
+                            .builder()
+                            .id(id)
+                            .title(title)
+                            .name(userName)
+                            .borrowDate(borrowDate)
+                            .devolutionDate(devolutionLocalDate)
+                            .build();
+
+                }
             }
+
+            return Optional.ofNullable(loanDto);
         } catch (SQLException e) {
             throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
         }
-        return loanDto;
     }
 
     public void deleteLoan(int id) throws SQLException {

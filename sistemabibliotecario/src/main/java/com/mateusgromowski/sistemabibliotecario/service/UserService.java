@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public Optional<User> getUserById(int id) throws SQLException {
-        return Optional.ofNullable(repository.getUserById(id));
+        return repository.getUserById(id);
     }
 
     public void updateUser(User user, int id) throws SQLException {

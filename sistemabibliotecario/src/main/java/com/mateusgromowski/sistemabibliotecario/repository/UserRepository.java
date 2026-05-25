@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.model.User;
@@ -27,17 +28,20 @@ public class UserRepository {
         }
     }
 
-    public User getUserById(int id) throws SQLException {
+    public Optional<User> getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM user_table WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            User user = null;
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                User user = User.builder().id(rs.getInt("id")).name(rs.getString("name")).email(rs.getString("email"))
-                        .build();
-                return user;
+            try (ResultSet rs = ps.executeQuery();) {
+                if (rs.next()) {
+                    user = User.builder().id(rs.getInt("id")).name(rs.getString("name"))
+                            .email(rs.getString("email"))
+                            .build();
+
+                }
             }
-            return null;
+            return Optional.ofNullable(user);
         } catch (SQLException e) {
             throw new SQLException("Usuário inacessível. " + e.getMessage());
         }

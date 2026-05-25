@@ -31,7 +31,7 @@ public class LoanService {
         repository.updateLoan(id, dto);
     }
 
-    public LoanDetailedDTO getFormattedLoan(int id) throws SQLException {
+    public Optional<LoanDetailedDTO> getFormattedLoan(int id) throws SQLException {
         return repository.getFormattedLoan(id);
     }
 
