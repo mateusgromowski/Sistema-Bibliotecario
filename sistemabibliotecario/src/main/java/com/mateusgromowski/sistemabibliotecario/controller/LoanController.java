@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 import com.mateusgromowski.sistemabibliotecario.exception.BookAlreadyReturnedException;
+import com.mateusgromowski.sistemabibliotecario.exception.InvalidLoanOperationException;
 import com.mateusgromowski.sistemabibliotecario.exception.SimultaneousLoanException;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 import com.mateusgromowski.sistemabibliotecario.service.LoanService;
@@ -20,7 +21,7 @@ public class LoanController {
     public void addLoan(int bookId, int userId) {
         try {
             service.addLoan(new LoanDTO(bookId, userId));
-        } catch (SQLException e) {
+        } catch (SQLException | SimultaneousLoanException e) {
             e.printStackTrace();
         }
     }
@@ -47,7 +48,7 @@ public class LoanController {
         LoanDTO dto = new LoanDTO(bookId, userId);
         try {
             service.updateLoan(id, dto);
-        } catch (SQLException | SimultaneousLoanException e) {
+        } catch (SQLException | InvalidLoanOperationException e) {
             e.printStackTrace();
         }
     }
