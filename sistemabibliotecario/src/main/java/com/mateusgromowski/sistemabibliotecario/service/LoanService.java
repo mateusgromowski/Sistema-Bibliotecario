@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
+import com.mateusgromowski.sistemabibliotecario.exception.BookAlreadyReturnedException;
+import com.mateusgromowski.sistemabibliotecario.exception.SimultaneousLoanException;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 import com.mateusgromowski.sistemabibliotecario.repository.LoanRepository;
 
@@ -19,7 +21,10 @@ public class LoanService {
         repository.addLoan(dto);
     }
 
-    public void returnLoan(int id) throws SQLException {
+    public void returnLoan(int id) throws SQLException, BookAlreadyReturnedException {
+        if (getLoanById(id).orElseThrow(NullPointerException::new).getDevolutionDate() != null) {
+            throw new BookAlreadyReturnedException("Livro já devolvido.");
+        }
         repository.returnLoan(id);
     }
 
@@ -27,7 +32,11 @@ public class LoanService {
         return repository.getLoanById(id);
     }
 
-    public void updateLoan(int id, LoanDTO dto) throws SQLException {
+    public void updateLoan(int id, LoanDTO dto) throws SQLException, SimultaneousLoanException {
+        if (getLoanById(id).orElseThrow(NullPointerException::new).getDevolutionDate() == null) {
+            throw new SimultaneousLoanException("Livro já está em empréstimo.");
+
+        }
         repository.updateLoan(id, dto);
     }
 

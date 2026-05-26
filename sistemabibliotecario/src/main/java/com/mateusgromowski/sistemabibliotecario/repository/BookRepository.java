@@ -35,7 +35,7 @@ public class BookRepository {
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery();) {
-                while (rs.next()) {
+                if (rs.next()) {
                     book = Book.builder().id(rs.getInt("id")).title(rs.getString("title"))
                             .author(rs.getString("author"))
                             .isbn(rs.getString("isbn"))
