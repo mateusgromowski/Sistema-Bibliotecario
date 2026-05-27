@@ -14,6 +14,12 @@ public class BookService {
     }
 
     public void addBook(Book book) throws SQLException {
+        validateBook(book);
+        repository.addBook(book);
+
+    }
+
+    private void validateBook(Book book) throws IllegalArgumentException {
         String title = book.getTitle();
         String author = book.getAuthor();
         String isbn = book.getIsbn();
@@ -33,9 +39,6 @@ public class BookService {
         if (!(isbnLength == 10 || isbnLength == 13)) {
             throw new IllegalArgumentException("O ISBN deve ter 13 ou 10 dígitos.");
         }
-
-        repository.addBook(book);
-
     }
 
     public Optional<Book> getBookById(int id) throws SQLException {
@@ -43,6 +46,7 @@ public class BookService {
     }
 
     public void updateBook(int id, Book book) throws SQLException {
+        validateBook(book);
         repository.updateBook(id, book);
     }
 
