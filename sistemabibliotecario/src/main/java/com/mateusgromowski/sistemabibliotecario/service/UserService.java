@@ -14,10 +14,7 @@ public class UserService {
     }
 
     public void addUser(User user) throws SQLException {
-        String name = user.getName();
-        String email = user.getEmail();
-        verifyInfo(name, Type.NOME);
-        verifyInfo(email, Type.EMAIL);
+        verifyUser(user);
         repository.addUser(user);
     }
 
@@ -40,7 +37,15 @@ public class UserService {
     }
 
     public void updateUser(User user, int id) throws SQLException {
+        verifyUser(user);
         repository.updateUser(user, id);
+    }
+
+    private void verifyUser(User user) {
+        String name = user.getName();
+        String email = user.getEmail();
+        verifyInfo(name, Type.NOME);
+        verifyInfo(email, Type.EMAIL);
     }
 
     public void deleteUser(int id) throws SQLException {
