@@ -3,6 +3,7 @@ package com.mateusgromowski.sistemabibliotecario.service;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import com.mateusgromowski.sistemabibliotecario.model.Type;
 import com.mateusgromowski.sistemabibliotecario.model.User;
 import com.mateusgromowski.sistemabibliotecario.repository.UserRepository;
 

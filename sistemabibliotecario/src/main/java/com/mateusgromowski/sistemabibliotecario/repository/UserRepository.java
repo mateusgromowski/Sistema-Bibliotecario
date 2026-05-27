@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
@@ -53,7 +54,10 @@ public class UserRepository {
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setInt(3, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new NoSuchElementException("Elemento inexistente.");
+            }
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar usuário. " + e.getMessage());
         }
@@ -64,7 +68,10 @@ public class UserRepository {
 
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new NoSuchElementException("Elemento inexistente.");
+            }
         } catch (SQLException e) {
             throw new SQLException("Impossível deletar usuário. " + e.getMessage());
         }

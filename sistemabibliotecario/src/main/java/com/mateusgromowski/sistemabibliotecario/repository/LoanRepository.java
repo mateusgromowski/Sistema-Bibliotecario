@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
@@ -91,7 +92,10 @@ public class LoanRepository {
             ps.setInt(1, dto.bookId());
             ps.setInt(2, dto.userId());
             ps.setInt(3, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new NoSuchElementException("Elemento inexistente.");
+            }
         } catch (SQLException e) {
             throw new SQLException("Impossível atualizar empréstimo. " + e.getMessage());
         }
@@ -132,7 +136,10 @@ public class LoanRepository {
         String sql = "DELETE FROM loan WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new NoSuchElementException("Elemento inexistente.");
+            }
 
         } catch (SQLException e) {
             throw new SQLException("Impossível deletar empréstimo. " + e.getMessage());

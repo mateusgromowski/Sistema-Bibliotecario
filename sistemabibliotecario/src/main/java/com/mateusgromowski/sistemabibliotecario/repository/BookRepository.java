@@ -67,15 +67,17 @@ public class BookRepository {
     }
 
     public void verifyLoanByBookId(int id) throws ActiveBorrowException {
-        String sql = "SELECT * FROM loan WHERE id = ? AND devolution_date IS NULL";
+        String sql = "SELECT * FROM loan WHERE book_id = ? AND devolution_date IS NULL";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                throw new ActiveBorrowException("O livro está com empréstimo ativo.");
+            try (ResultSet rs = ps.executeQuery();) {
+
+                if (rs.next()) {
+                    throw new ActiveBorrowException("O livro está com empréstimo ativo.");
+                }
             }
         } catch (SQLException e) {
-            throw new NoSuchElementException("Livro não encontrado.");
+            throw new NoSuchElementException("Livro não encontrado." + e.getMessage());
         }
     }
 
@@ -83,7 +85,10 @@ public class BookRepository {
         String sql = "DELETE FROM book WHERE id = ?";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
+            if (rows == 0) {
+                throw new NoSuchElementException("Elemento inexistente.");
+            }
         } catch (SQLException e) {
             throw new SQLException("Erro ao deletar livro: " + e.getMessage());
         }
