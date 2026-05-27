@@ -3,6 +3,7 @@ package com.mateusgromowski.sistemabibliotecario.service;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import com.mateusgromowski.sistemabibliotecario.exception.ActiveBorrowException;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.repository.BookRepository;
 
@@ -50,7 +51,8 @@ public class BookService {
         repository.updateBook(id, book);
     }
 
-    public void deleteBook(int id) throws SQLException {
+    public void deleteBook(int id) throws SQLException, ActiveBorrowException {
+        repository.verifyLoanByBookId(id);
         repository.deleteBook(id);
     }
 }

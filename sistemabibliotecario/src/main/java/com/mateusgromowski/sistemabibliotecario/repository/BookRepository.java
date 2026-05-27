@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
+import com.mateusgromowski.sistemabibliotecario.exception.ActiveBorrowException;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 
 public class BookRepository {
@@ -61,6 +63,19 @@ public class BookRepository {
             }
         } catch (SQLException e) {
             throw new SQLException("Erro ao atualizar o livro: " + e.getMessage());
+        }
+    }
+
+    public void verifyLoanByBookId(int id) throws ActiveBorrowException {
+        String sql = "SELECT * FROM loan WHERE id = ? AND devolution_date IS NULL";
+        try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                throw new ActiveBorrowException("O livro está com empréstimo ativo.");
+            }
+        } catch (SQLException e) {
+            throw new NoSuchElementException("Livro não encontrado.");
         }
     }
 

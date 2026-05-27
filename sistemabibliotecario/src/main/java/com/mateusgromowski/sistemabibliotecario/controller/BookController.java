@@ -3,6 +3,7 @@ package com.mateusgromowski.sistemabibliotecario.controller;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import com.mateusgromowski.sistemabibliotecario.exception.ActiveBorrowException;
 import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.service.BookService;
 
@@ -43,7 +44,7 @@ public class BookController {
     public void deleteBook(int id) {
         try {
             service.deleteBook(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ActiveBorrowException e) {
             e.printStackTrace();
         }
     }
