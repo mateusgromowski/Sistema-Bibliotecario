@@ -26,16 +26,16 @@ public class Menu {
         do {
             try {
                 input = mainMenu();
-            } catch (InputMismatchException e) {
-                System.out.println(e.getMessage());
+            } catch (InputMismatchException | NumberFormatException e) {
+                System.out.println("Entrada inválida.");
                 continue;
             }
-
+            booksMenu();
         } while (input != 0);
         System.out.println("Obrigado por usar.");
     }
 
-    public int mainMenu() throws InputMismatchException {
+    public int mainMenu() throws InputMismatchException, NumberFormatException {
         int input = 0;
         System.out.println("\n=== SISTEMA BIBLIOTECARIO ===");
         System.out.println("1. Menu livros.");
@@ -45,9 +45,52 @@ public class Menu {
         System.out.print("Escolha: ");
         input = Integer.parseInt(sc.nextLine());
         if (input > 3 || input < 0) {
-            throw new InputMismatchException("Entrada inválida.");
+            throw new InputMismatchException();
         }
         return input;
+    }
+
+    public void menusList(int input) {
+        switch (input) {
+            case 1:
+                try {
+                    booksMenu();
+
+                } catch (InputMismatchException | NumberFormatException e) {
+                    System.out.println("Entrada inválida.");
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void booksMenu() throws InputMismatchException, NumberFormatException {
+        int input = 0;
+        System.out.println("\n===MENU LIVROS===");
+        System.out.println("1. Adicionar livro");
+        System.out.println("2. Buscar livro por ID");
+        System.out.println("3. Atualizar livro");
+        System.out.println("4. Deletar livro");
+        System.out.print("Escolha: ");
+        input = Integer.parseInt(sc.nextLine());
+        if (input > 4 || input < 1) {
+            throw new InputMismatchException();
+        }
+        booksMenuList(input);
+    }
+
+    // Todo
+    public void booksMenuList(int input) {
+        switch (input) {
+            case 1:
+
+                break;
+
+            default:
+                break;
+        }
     }
 
 }
