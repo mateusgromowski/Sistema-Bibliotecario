@@ -20,7 +20,7 @@ public class LoanService {
     }
 
     public void addLoan(LoanDTO dto) throws SQLException, SimultaneousLoanException {
-        if (findBookByLoan(dto.bookId())) {
+        if (!findBookByLoan(dto.bookId())) {
             repository.addLoan(dto);
             return;
         }
