@@ -30,7 +30,7 @@ public class Menu {
                 System.out.println("Entrada inválida.");
                 continue;
             }
-            booksMenu();
+            menusList(input);
         } while (input != 0);
         System.out.println("Obrigado por usar.");
     }
