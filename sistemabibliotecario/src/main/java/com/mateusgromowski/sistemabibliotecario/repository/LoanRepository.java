@@ -12,7 +12,6 @@ import java.util.Optional;
 import com.mateusgromowski.sistemabibliotecario.conn.ConnectionFactory;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDTO;
 import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
-import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 
 public class LoanRepository {
@@ -44,17 +43,16 @@ public class LoanRepository {
         }
     }
 
-    public Optional<Book> findBookByLoan(int bookId) throws SQLException {
-        String sql = "SELECT * FROM book WHERE book_id = ?";
+    public boolean findBookByLoan(int bookId) throws SQLException {
+        String sql = "SELECT * FROM loan WHERE book_id = ? AND devolution_date IS NULL";
         try (Connection conn = connectionFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, bookId);
-            Book book = null;
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next() && rs.getDate("borrow_date") == null) {
-                    book = Book.builder().id(bookId).title(rs.getString("title")).isbn(rs.getString("isbn")).build();
+                if (rs.next()) {
+                    return true;
                 }
             }
-            return Optional.ofNullable(book);
+            return false;
         } catch (SQLException e) {
             throw new SQLException("Empréstimo inalcançável. " + e.getMessage());
         }

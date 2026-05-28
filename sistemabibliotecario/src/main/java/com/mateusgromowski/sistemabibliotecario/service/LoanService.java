@@ -9,7 +9,6 @@ import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 import com.mateusgromowski.sistemabibliotecario.exception.BookAlreadyReturnedException;
 import com.mateusgromowski.sistemabibliotecario.exception.InvalidLoanOperationException;
 import com.mateusgromowski.sistemabibliotecario.exception.SimultaneousLoanException;
-import com.mateusgromowski.sistemabibliotecario.model.Book;
 import com.mateusgromowski.sistemabibliotecario.model.Loan;
 import com.mateusgromowski.sistemabibliotecario.repository.LoanRepository;
 
@@ -21,7 +20,7 @@ public class LoanService {
     }
 
     public void addLoan(LoanDTO dto) throws SQLException, SimultaneousLoanException {
-        if (findBookByLoan(dto.bookId()).isEmpty()) {
+        if (findBookByLoan(dto.bookId())) {
             repository.addLoan(dto);
             return;
         }
@@ -35,7 +34,7 @@ public class LoanService {
         repository.returnLoan(id);
     }
 
-    public Optional<Book> findBookByLoan(int bookId) throws SQLException {
+    public boolean findBookByLoan(int bookId) throws SQLException {
         return repository.findBookByLoan(bookId);
     }
 
