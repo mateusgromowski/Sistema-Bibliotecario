@@ -35,7 +35,7 @@ public class Menu {
         System.out.println("Obrigado por usar.");
     }
 
-    public int mainMenu() throws InputMismatchException, NumberFormatException {
+    private int mainMenu() throws InputMismatchException, NumberFormatException {
         int input = 0;
         System.out.println("\n=== SISTEMA BIBLIOTECARIO ===");
         System.out.println("1. Menu livros.");
@@ -50,7 +50,7 @@ public class Menu {
         return input;
     }
 
-    public void menusList(int input) {
+    private void menusList(int input) {
         switch (input) {
             case 1:
                 try {
@@ -66,31 +66,46 @@ public class Menu {
         }
     }
 
-    public void booksMenu() throws InputMismatchException, NumberFormatException {
+    private void booksMenu() throws InputMismatchException, NumberFormatException {
         int input = 0;
         System.out.println("\n===MENU LIVROS===");
         System.out.println("1. Adicionar livro");
         System.out.println("2. Buscar livro por ID");
         System.out.println("3. Atualizar livro");
         System.out.println("4. Deletar livro");
+        System.out.println("0. Voltar");
         System.out.print("Escolha: ");
         input = Integer.parseInt(sc.nextLine());
-        if (input > 4 || input < 1) {
+        if (input > 4 || input < 0) {
             throw new InputMismatchException();
         }
         booksMenuList(input);
     }
 
-    // Todo
-    public void booksMenuList(int input) {
+
+    private void booksMenuList(int input) {
         switch (input) {
             case 1:
-
+                addBook();
                 break;
-
+            case 2:
+                getBookById();
+                break;
+            case 0:
+                break;
             default:
                 break;
         }
+    }
+
+    private void addBook() {
+        System.out.print("Imprima o nome do livro: ");
+        String name = sc.nextLine();
+        System.out.print("Imprima o autor do livro: ");
+        String author = sc.nextLine();
+        System.out.print("Imprima o ISBN do livro: ");
+        String isbn = sc.nextLine();
+        bookController.addBook(name, author, isbn);
     }
 
 }
