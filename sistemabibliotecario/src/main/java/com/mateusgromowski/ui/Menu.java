@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Menu {
     private Scanner sc;
     private BookMenu bookMenu;
+    private UserMenu userMenu;
 
-    public Menu(Scanner sc, BookMenu bookMenu) {
+    public Menu(Scanner sc, BookMenu bookMenu, UserMenu userMenu) {
         this.sc = sc;
         this.bookMenu = bookMenu;
+        this.userMenu = userMenu;
     }
 
     public void start() {
@@ -46,11 +48,12 @@ public class Menu {
             case 1:
                 try {
                     bookMenu.showMenu();
-
                 } catch (InputMismatchException | NumberFormatException e) {
                     System.out.println("Entrada inválida.");
                 }
                 break;
+            case 2:
+                userMenu.showMenu();
 
             default:
                 break;

@@ -14,6 +14,7 @@ import com.mateusgromowski.sistemabibliotecario.service.LoanService;
 import com.mateusgromowski.sistemabibliotecario.service.UserService;
 import com.mateusgromowski.ui.BookMenu;
 import com.mateusgromowski.ui.Menu;
+import com.mateusgromowski.ui.UserMenu;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +33,8 @@ public class Main {
         LoanController loanController = new LoanController(loanService);
 
         BookMenu bookMenu = new BookMenu(bookController, sc);
-        Menu menu = new Menu(sc, bookMenu);
+        UserMenu userMenu = new UserMenu(userController, sc);
+        Menu menu = new Menu(sc, bookMenu, userMenu);
         menu.start();
     }
 }

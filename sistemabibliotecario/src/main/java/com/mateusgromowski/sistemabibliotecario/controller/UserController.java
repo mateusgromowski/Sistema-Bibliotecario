@@ -13,15 +13,13 @@ public class UserController {
         this.service = service;
     }
 
-    public boolean addUser(String name, String email) {
+    public void addUser(String name, String email) throws SQLException {
         User user = User.builder().name(name).email(email).build();
         try {
             service.addUser(user);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new SQLException(e.getMessage() + " Email já existente.");
         }
-        return true;
     }
 
     public Optional<User> getUserById(int id) {
