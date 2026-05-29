@@ -12,6 +12,7 @@ import com.mateusgromowski.sistemabibliotecario.repository.UserRepository;
 import com.mateusgromowski.sistemabibliotecario.service.BookService;
 import com.mateusgromowski.sistemabibliotecario.service.LoanService;
 import com.mateusgromowski.sistemabibliotecario.service.UserService;
+import com.mateusgromowski.ui.BookMenu;
 import com.mateusgromowski.ui.Menu;
 
 public class Main {
@@ -30,7 +31,8 @@ public class Main {
         LoanService loanService = new LoanService(loanRepository);
         LoanController loanController = new LoanController(loanService);
 
-        Menu menu = new Menu(sc, bookController, userController, loanController);
+        BookMenu bookMenu = new BookMenu(bookController, sc);
+        Menu menu = new Menu(sc, bookMenu);
         menu.start();
     }
 }
