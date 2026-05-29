@@ -1,11 +1,14 @@
 package com.mateusgromowski.ui;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Scanner;
 
 import com.mateusgromowski.sistemabibliotecario.controller.BookController;
 import com.mateusgromowski.sistemabibliotecario.controller.LoanController;
 import com.mateusgromowski.sistemabibliotecario.controller.UserController;
+import com.mateusgromowski.sistemabibliotecario.model.Book;
 
 public class Menu {
     private Scanner sc;
@@ -82,7 +85,6 @@ public class Menu {
         booksMenuList(input);
     }
 
-
     private void booksMenuList(int input) {
         switch (input) {
             case 1:
@@ -96,6 +98,24 @@ public class Menu {
             default:
                 break;
         }
+    }
+
+    private void getBookById() {
+        System.out.print("Insira o id do livro: ");
+        int id = Integer.parseInt(sc.nextLine());
+        try {
+            Book book = bookController.getBookById(id).orElseThrow(NoSuchElementException::new);
+            printFormattedBook(book);
+        } catch (NoSuchElementException e) {
+            System.out.println("Livro inexistente.");
+        }
+    }
+
+    private void printFormattedBook(Book book) {
+        System.out.println("Id: " + book.getId());
+        System.out.println("Título: " + book.getTitle());
+        System.out.println("Autor: " + book.getAuthor());
+        System.out.println("ISBN: " + book.getIsbn());
     }
 
     private void addBook() {
