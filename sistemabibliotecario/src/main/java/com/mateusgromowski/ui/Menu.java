@@ -93,6 +93,8 @@ public class Menu {
             case 2:
                 getBookById();
                 break;
+            case 3:
+                updateBook();
             case 0:
                 break;
             default:
@@ -119,13 +121,25 @@ public class Menu {
     }
 
     private void addBook() {
-        System.out.print("Imprima o nome do livro: ");
+        System.out.print("Insira o nome do livro: ");
         String name = sc.nextLine();
-        System.out.print("Imprima o autor do livro: ");
+        System.out.print("Insira o autor do livro: ");
         String author = sc.nextLine();
-        System.out.print("Imprima o ISBN do livro: ");
+        System.out.print("Insira o ISBN do livro: ");
         String isbn = sc.nextLine();
         bookController.addBook(name, author, isbn);
+    }
+
+    private void updateBook() {
+        System.out.print("Insira o ID do livro: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.print("Insira o nome do livro: ");
+        String name = sc.nextLine();
+        System.out.print("Insira o autor do livro: ");
+        String author = sc.nextLine();
+        System.out.print("Insira o ISBN do livro: ");
+        String isbn = sc.nextLine();
+        bookController.updateBook(id, name, author, isbn);
     }
 
 }
