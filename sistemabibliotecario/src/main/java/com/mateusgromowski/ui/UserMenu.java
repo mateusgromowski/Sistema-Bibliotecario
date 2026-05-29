@@ -1,9 +1,11 @@
 package com.mateusgromowski.ui;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.mateusgromowski.sistemabibliotecario.controller.UserController;
+import com.mateusgromowski.sistemabibliotecario.model.User;
 
 public class UserMenu {
     private UserController controller;
@@ -17,6 +19,7 @@ public class UserMenu {
     public void showMenu() {
         int input = 0;
         do {
+            System.out.println("\n===MENU USUARIOS===");
             System.out.println("1. Adicionar usuário");
             System.out.println("2. Buscar usuário por ID");
             System.out.println("3. Atualizar usuário");
@@ -33,16 +36,34 @@ public class UserMenu {
             case 1:
                 addUser();
                 break;
-
+            case 2:
+                getUserById();
+                break;
             default:
                 break;
         }
     }
 
+    private void getUserById() {
+        System.out.print("Insira o id do usuario: ");
+        int id = Integer.parseInt(sc.nextLine());
+        try {
+            User user = controller.getUserById(id).orElseThrow(NoSuchElementException::new);
+            printUser(user);
+        } catch (NoSuchElementException e) {
+            System.out.println("Usuário inexistente.");
+        }
+    }
+
+    private void printUser(User user) {
+        System.out.println("Nome do usuário: " + user.getName());
+        System.out.println("Email do usuário: " + user.getEmail());
+    }
+
     private void addUser() {
         System.out.print("Insira o nome do usuário: ");
         String name = sc.nextLine();
-        System.out.println("Insira o email do usuário: ");
+        System.out.print("Insira o email do usuário: ");
         String email = sc.nextLine();
         try {
             controller.addUser(name, email);
