@@ -45,7 +45,7 @@ public class BookController {
         try {
             service.deleteBook(id);
         } catch (SQLException | ActiveBorrowException e) {
-            e.printStackTrace();
+            System.out.println("Livro não pôde ser deletado. Um empréstimo está ativo.");
         }
     }
 }

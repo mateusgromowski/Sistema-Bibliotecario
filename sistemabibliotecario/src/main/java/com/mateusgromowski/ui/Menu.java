@@ -95,11 +95,19 @@ public class Menu {
                 break;
             case 3:
                 updateBook();
+            case 4:
+                deleteBook();
             case 0:
                 break;
             default:
                 break;
         }
+    }
+
+    private void deleteBook() {
+        System.out.print("Insira o ID do livro: ");
+        int id = Integer.parseInt(sc.nextLine());
+        bookController.deleteBook(id);
     }
 
     private void getBookById() {
