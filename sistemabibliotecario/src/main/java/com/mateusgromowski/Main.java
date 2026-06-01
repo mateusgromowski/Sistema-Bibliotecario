@@ -13,6 +13,7 @@ import com.mateusgromowski.sistemabibliotecario.service.BookService;
 import com.mateusgromowski.sistemabibliotecario.service.LoanService;
 import com.mateusgromowski.sistemabibliotecario.service.UserService;
 import com.mateusgromowski.ui.BookMenu;
+import com.mateusgromowski.ui.LoanMenu;
 import com.mateusgromowski.ui.Menu;
 import com.mateusgromowski.ui.UserMenu;
 
@@ -34,7 +35,8 @@ public class Main {
 
         BookMenu bookMenu = new BookMenu(bookController, sc);
         UserMenu userMenu = new UserMenu(userController, sc);
-        Menu menu = new Menu(sc, bookMenu, userMenu);
+        LoanMenu loanMenu = new LoanMenu(loanController, sc);
+        Menu menu = new Menu(sc, bookMenu, userMenu, loanMenu);
         menu.start();
     }
 }

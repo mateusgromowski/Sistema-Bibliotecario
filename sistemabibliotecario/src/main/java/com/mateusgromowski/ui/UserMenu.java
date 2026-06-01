@@ -41,8 +41,10 @@ public class UserMenu {
                 break;
             case 3:
                 updateUser();
+                break;
             case 4:
                 deleteUser();
+                break;
             default:
                 break;
         }

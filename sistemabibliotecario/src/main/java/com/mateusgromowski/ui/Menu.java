@@ -7,11 +7,13 @@ public class Menu {
     private Scanner sc;
     private BookMenu bookMenu;
     private UserMenu userMenu;
+    private LoanMenu loanMenu;
 
-    public Menu(Scanner sc, BookMenu bookMenu, UserMenu userMenu) {
+    public Menu(Scanner sc, BookMenu bookMenu, UserMenu userMenu, LoanMenu loanMenu) {
         this.sc = sc;
         this.bookMenu = bookMenu;
         this.userMenu = userMenu;
+        this.loanMenu = loanMenu;
     }
 
     public void start() {
@@ -54,7 +56,9 @@ public class Menu {
                 break;
             case 2:
                 userMenu.showMenu();
-
+                break;
+            case 3:
+                loanMenu.showMenu();
             default:
                 break;
         }
