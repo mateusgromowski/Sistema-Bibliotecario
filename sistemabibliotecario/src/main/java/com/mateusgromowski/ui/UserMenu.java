@@ -40,10 +40,19 @@ public class UserMenu {
                 getUserById();
                 break;
             case 3:
-                updateUser()
+                updateUser();
+            case 4:
+                deleteUser();
             default:
                 break;
         }
+    }
+
+    private void deleteUser() {
+        System.out.print("Insira o id do usuário: ");
+        int id = Integer.parseInt(sc.nextLine());
+        controller.deleteUser(id);
+        System.out.println("Usuário deletado com sucesso.");
     }
 
     private void updateUser() {
