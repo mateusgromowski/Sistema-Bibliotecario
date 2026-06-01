@@ -39,9 +39,22 @@ public class UserMenu {
             case 2:
                 getUserById();
                 break;
+            case 3:
+                updateUser()
             default:
                 break;
         }
+    }
+
+    private void updateUser() {
+        System.out.print("Insira o id do usuário: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.print("Insira o nome do usuário: ");
+        String name = sc.nextLine();
+        System.out.println("Insira o email do usuário: ");
+        String email = sc.nextLine();
+        controller.updateUser(id, name, email);
+        System.out.println("Usuário adicionado com sucesso!");
     }
 
     private void getUserById() {
