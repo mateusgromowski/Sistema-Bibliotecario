@@ -59,6 +59,7 @@ public class Menu {
                 break;
             case 3:
                 loanMenu.showMenu();
+                break;
             default:
                 break;
         }
