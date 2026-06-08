@@ -18,18 +18,20 @@ public class BookMenu {
 
     public void showMenu() throws InputMismatchException, NumberFormatException {
         int input = 0;
-        System.out.println("\n===MENU LIVROS===");
-        System.out.println("1. Adicionar livro");
-        System.out.println("2. Buscar livro por ID");
-        System.out.println("3. Atualizar livro");
-        System.out.println("4. Deletar livro");
-        System.out.println("0. Voltar");
-        System.out.print("Escolha: ");
-        input = Integer.parseInt(sc.nextLine());
-        if (input > 4 || input < 0) {
-            throw new InputMismatchException();
-        }
-        booksMenuList(input);
+        do {
+            System.out.println("\n===MENU LIVROS===");
+            System.out.println("1. Adicionar livro");
+            System.out.println("2. Buscar livro por ID");
+            System.out.println("3. Atualizar livro");
+            System.out.println("4. Deletar livro");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha: ");
+            input = Integer.parseInt(sc.nextLine());
+            if (input > 4 || input < 0) {
+                throw new InputMismatchException();
+            }
+            booksMenuList(input);
+        } while (input != 0);
     }
 
     private void booksMenuList(int input) {
