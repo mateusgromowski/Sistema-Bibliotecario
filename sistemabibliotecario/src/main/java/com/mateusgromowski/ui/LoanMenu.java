@@ -32,6 +32,9 @@ public class LoanMenu {
         } while (input != 0);
     }
 
+    // 4. Atualizar empréstimo
+    // 5. Devolver livro
+    // 6. Deletar empréstimo
     private void loanMenu(int input) {
         switch (input) {
             case 1:
@@ -40,9 +43,22 @@ public class LoanMenu {
             case 2:
                 findLoanById();
                 break;
+            case 3:
+                updateLoan();
             default:
                 break;
         }
+    }
+
+    private void updateLoan() {
+        System.out.print("Insira o ID do empréstimo: ");
+        int id = Integer.parseInt(sc.nextLine());
+        System.out.print("Insira o ID do livro: ");
+        int bookId = Integer.parseInt(sc.nextLine());
+        System.out.print("Insira o ID do usuário: ");
+        int userId = Integer.parseInt(sc.nextLine());
+        controller.updateLoan(id, bookId, userId);
+        System.out.println("Empréstimo atualizado com sucesso!");
     }
 
     private void addLoan() {
