@@ -62,10 +62,10 @@ public class UserMenu {
         int id = Integer.parseInt(sc.nextLine());
         System.out.print("Insira o nome do usuário: ");
         String name = sc.nextLine();
-        System.out.println("Insira o email do usuário: ");
+        System.out.print("Insira o email do usuário: ");
         String email = sc.nextLine();
         controller.updateUser(id, name, email);
-        System.out.println("Usuário adicionado com sucesso!");
+        System.out.println("Usuário atualizado com sucesso!");
     }
 
     private void getUserById() {
