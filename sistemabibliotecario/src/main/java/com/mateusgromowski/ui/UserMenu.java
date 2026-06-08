@@ -26,7 +26,14 @@ public class UserMenu {
             System.out.println("4. Deletar usuário");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
-            input = Integer.parseInt(sc.nextLine());
+            try {
+                input = Integer.parseInt(sc.nextLine());
+                if (input > 4 || input < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Escolha inválida.");
+            }
             userMenu(input);
         } while (input != 0);
     }
