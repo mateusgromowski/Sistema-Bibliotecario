@@ -27,7 +27,14 @@ public class LoanMenu {
             System.out.println("5. Deletar empréstimo");
             System.out.println("0. Voltar");
             System.out.print("Escolha: ");
-            input = Integer.parseInt(sc.nextLine());
+            try {
+                input = Integer.parseInt(sc.nextLine());
+                if (input > 5 || input < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Escolha inválida.");
+            }
             loanMenu(input);
         } while (input != 0);
     }
