@@ -71,8 +71,12 @@ public class UserMenu {
         String name = sc.nextLine();
         System.out.print("Insira o email do usuário: ");
         String email = sc.nextLine();
-        controller.updateUser(id, name, email);
-        System.out.println("Usuário atualizado com sucesso!");
+        try {
+            controller.updateUser(id, name, email);
+            System.out.println("Usuário atualizado com sucesso!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Dados inválidos.");
+        }
     }
 
     private void getUserById() {
@@ -101,6 +105,8 @@ public class UserMenu {
             System.out.println("Usuário adicionado com sucesso!");
         } catch (SQLException e) {
             System.out.println("Email já cadastrado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Dados inválidos.");
         }
     }
 }

@@ -39,7 +39,6 @@ public class LoanMenu {
         } while (input != 0);
     }
 
-    // 6. Deletar empréstimo
     private void loanMenu(int input) {
         switch (input) {
             case 1:
