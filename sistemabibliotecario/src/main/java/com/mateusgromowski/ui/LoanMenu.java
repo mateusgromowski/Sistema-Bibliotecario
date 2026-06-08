@@ -32,8 +32,6 @@ public class LoanMenu {
         } while (input != 0);
     }
 
-    // 4. Atualizar empréstimo
-    // 5. Devolver livro
     // 6. Deletar empréstimo
     private void loanMenu(int input) {
         switch (input) {
@@ -45,11 +43,22 @@ public class LoanMenu {
                 break;
             case 3:
                 updateLoan();
+                break;
             case 4:
                 returnBook();
+                break;
+            case 5:
+                deleteLoan();
+                break;
             default:
                 break;
         }
+    }
+
+    private void deleteLoan() {
+        System.out.print("Insira o id do empréstimo: ");
+        int id = Integer.parseInt(sc.nextLine());
+        controller.deleteLoan(id);
     }
 
     private void returnBook() {
