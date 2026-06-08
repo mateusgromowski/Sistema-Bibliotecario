@@ -45,9 +45,18 @@ public class LoanMenu {
                 break;
             case 3:
                 updateLoan();
+            case 4:
+                returnBook();
             default:
                 break;
         }
+    }
+
+    private void returnBook() {
+        System.out.print("Insira o ID do empréstimo: ");
+        int id = Integer.parseInt(sc.nextLine());
+        controller.returnLoan(id);
+        System.out.println("Livro devolvido com sucesso!");
     }
 
     private void updateLoan() {
