@@ -1,8 +1,11 @@
 package com.mateusgromowski.ui;
 
+import java.time.LocalDate;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.mateusgromowski.sistemabibliotecario.controller.LoanController;
+import com.mateusgromowski.sistemabibliotecario.dto.LoanDetailedDTO;
 
 public class LoanMenu {
     private LoanController controller;
@@ -34,7 +37,9 @@ public class LoanMenu {
             case 1:
                 addLoan();
                 break;
-
+            case 2:
+                findLoanById();
+                break;
             default:
                 break;
         }
@@ -44,10 +49,32 @@ public class LoanMenu {
         System.out.print("Insira o id do livro: ");
         int bookId = Integer.parseInt(sc.nextLine());
         System.out.print("Insira o id do usuário: ");
-
         int userId = Integer.parseInt(sc.nextLine());
         controller.addLoan(bookId, userId);
         System.out.println("Livro emprestado com sucesso.");
+    }
+
+    private void findLoanById() {
+        System.out.print("Insira o ID do empréstimo: ");
+        int id = Integer.parseInt(sc.nextLine());
+        try {
+            LoanDetailedDTO dto = controller.getFormattedLoan(id).orElseThrow(NoSuchElementException::new);
+            printDto(dto);
+        } catch (NoSuchElementException e) {
+            System.out.println("Empréstimo inexistente. Consulte o banco de dados.");
+        }
+    }
+
+    private void printDto(LoanDetailedDTO dto) {
+        System.out.println("Nome do livro: " + dto.title());
+        System.out.println("Usuário com o livro: " + dto.name());
+        System.out.println("Data do empréstimo: " + dto.borrowDate());
+        LocalDate devolutionDate = dto.devolutionDate();
+        if (devolutionDate == null) {
+            System.out.println("Data de devolução: ainda não devolvido");
+            return;
+        }
+        System.out.println("Data de devolução: " + devolutionDate);
     }
 
 }
