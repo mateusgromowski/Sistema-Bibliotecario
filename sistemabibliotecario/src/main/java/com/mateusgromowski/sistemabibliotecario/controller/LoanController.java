@@ -21,16 +21,18 @@ public class LoanController {
     public void addLoan(int bookId, int userId) {
         try {
             service.addLoan(new LoanDTO(bookId, userId));
+            System.out.println("Empréstimo adicionado com sucesso!");
         } catch (SQLException | SimultaneousLoanException e) {
-            e.printStackTrace();
+            System.out.println("O empréstimo não pôde ser adicionado.");
         }
     }
 
     public void returnLoan(int id) {
         try {
             service.returnLoan(id);
+            System.out.println("Livro devolvido com sucesso!");
         } catch (SQLException | BookAlreadyReturnedException e) {
-            e.printStackTrace();
+            System.out.println("O livro não pôde ser devolvido.");
         }
     }
 
@@ -48,8 +50,9 @@ public class LoanController {
         LoanDTO dto = new LoanDTO(bookId, userId);
         try {
             service.updateLoan(id, dto);
+            System.out.println("Empréstimo atualizado com sucesso!");
         } catch (SQLException | InvalidLoanOperationException e) {
-            e.printStackTrace();
+            System.out.println("O empréstimo não pôde ser atualizado");
         }
     }
 

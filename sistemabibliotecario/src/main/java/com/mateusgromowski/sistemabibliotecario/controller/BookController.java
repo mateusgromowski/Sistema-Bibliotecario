@@ -18,8 +18,8 @@ public class BookController {
         Book book = Book.builder().title(title).author(author).isbn(isbn).build();
         try {
             service.addBook(book);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | IllegalArgumentException e) {
+            System.out.println("O livro não pôde ser adicionado.");
         }
     }
 
@@ -27,7 +27,7 @@ public class BookController {
         try {
             return service.getBookById(id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("O livro não pôde ser encontrado");
             return Optional.empty();
         }
     }
@@ -36,14 +36,16 @@ public class BookController {
         Book book = Book.builder().id(id).title(title).author(author).isbn(isbn).build();
         try {
             service.updateBook(id, book);
+            System.out.println("Livro atualizado com sucesso!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("O livro não pôde ser atualizado.");
         }
     }
 
     public void deleteBook(int id) {
         try {
             service.deleteBook(id);
+            System.out.println("Livro deletado com sucesso!");
         } catch (SQLException | ActiveBorrowException e) {
             System.out.println("Livro não pôde ser deletado. Um empréstimo está ativo.");
         }

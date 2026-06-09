@@ -91,7 +91,6 @@ public class LoanMenu {
         System.out.print("Insira o id do usuário: ");
         int userId = Integer.parseInt(sc.nextLine());
         controller.addLoan(bookId, userId);
-        System.out.println("Livro emprestado com sucesso.");
     }
 
     private void findLoanById() {

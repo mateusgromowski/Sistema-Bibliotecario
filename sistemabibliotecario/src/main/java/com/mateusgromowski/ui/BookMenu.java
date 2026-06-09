@@ -60,7 +60,6 @@ public class BookMenu {
         System.out.print("Insira o ID do livro: ");
         int id = Integer.parseInt(sc.nextLine());
         controller.deleteBook(id);
-        System.out.println("Livro deletado com sucesso!");
     }
 
     private void getBookById() {
