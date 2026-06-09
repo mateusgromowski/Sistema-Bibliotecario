@@ -37,7 +37,7 @@ public class BookController {
         try {
             service.updateBook(id, book);
             System.out.println("Livro atualizado com sucesso!");
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             System.out.println("O livro não pôde ser atualizado.");
         }
     }

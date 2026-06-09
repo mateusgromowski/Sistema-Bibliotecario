@@ -71,7 +71,6 @@ public class LoanMenu {
         System.out.print("Insira o ID do empréstimo: ");
         int id = Integer.parseInt(sc.nextLine());
         controller.returnLoan(id);
-        System.out.println("Livro devolvido com sucesso!");
     }
 
     private void updateLoan() {
@@ -82,7 +81,6 @@ public class LoanMenu {
         System.out.print("Insira o ID do usuário: ");
         int userId = Integer.parseInt(sc.nextLine());
         controller.updateLoan(id, bookId, userId);
-        System.out.println("Empréstimo atualizado com sucesso!");
     }
 
     private void addLoan() {

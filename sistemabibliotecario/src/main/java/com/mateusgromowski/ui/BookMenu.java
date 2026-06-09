@@ -88,7 +88,6 @@ public class BookMenu {
         System.out.print("Insira o ISBN do livro: ");
         String isbn = sc.nextLine();
         controller.addBook(name, author, isbn);
-        System.out.println("Livro adicionado com sucesso!");
     }
 
     private void updateBook() {
@@ -101,7 +100,6 @@ public class BookMenu {
         System.out.print("Insira o ISBN do livro: ");
         String isbn = sc.nextLine();
         controller.updateBook(id, name, author, isbn);
-        System.out.println("Livro atualizado com sucesso!");
     }
 
 }
